@@ -14,8 +14,7 @@
  */
 function returnFirstArgument(age) {
   return age;
-}
-console.log(returnFirstArgument(5));
+};
 
 /*
  Задание 2:
@@ -31,16 +30,10 @@ console.log(returnFirstArgument(5));
  Пример:
    sumWithDefaults(10) вернет 110
  */
-function sumWithDefaults(a, b) {
+function sumWithDefaults(a, b=100) {
   return a + b;
-}
-console.log(sumWithDefaults(2,4));
+};
 
-function sumWithDefaults(a) {
-  const b = 100;
-  return a + b;
-}
-console.log(sumWithDefaults(10));
 /*
  Задание 3:
 
@@ -49,13 +42,10 @@ console.log(sumWithDefaults(10));
  Пример:
    returnFnResult(() => 'привет') вернет 'привет'
  */
+var retik = returnFnResult('hello');
 function returnFnResult(fn) {
-  function returnFn2(fn2) {
-    return fn2;
-  }
-  return returnFn2(fn);
+    return () => fn;
 };
-console.log(returnFnResult('hello'));
 
 /*
  Задание 4:
@@ -73,18 +63,10 @@ console.log(returnFnResult('hello'));
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-var f = returnCounter(5);
-function returnCounter(number) {
-  function sumNumber(numin) {
-    return numin + 1;
-  };
-  if (number === undefined) {
-    return sumNumber(0);
-  } else {
-    return sumNumber(number);
-  }
+var f = returnCounter(0);
+function returnCounter(number=0) {
+  return () => ++number;
 };
-console.log('result =', f);
 /*
  Задание 5 *:
 
@@ -94,7 +76,9 @@ console.log('result =', f);
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
-function returnArgumentsArray() {}
+function returnArgumentsArray(numbers) {
+  return Array.from(numbers);
+};
 
 /*
  Задание 6 *:
