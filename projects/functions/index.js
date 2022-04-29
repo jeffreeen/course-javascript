@@ -1,5 +1,7 @@
 /* ДЗ 1 - Функции */
 
+import { arguments } from "file-loader";
+
 /*
  Задание 1:
 
@@ -42,11 +44,10 @@ function sumWithDefaults(a, b=100) {
  Пример:
    returnFnResult(() => 'привет') вернет 'привет'
  */
-var retik = returnFnResult('hello');
-function returnFnResult(fn) {
-    return () => fn;
+function returnFnResult(fn){
+  let r= fn()
+  return r;
 };
-
 /*
  Задание 4:
 
@@ -76,10 +77,9 @@ function returnCounter(number=0) {
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
-function returnArgumentsArray(numbers) {
-  return Array.from(numbers);
+function returnArgumentsArray(number) {
+  return Array.from(arguments);
 };
-
 /*
  Задание 6 *:
 
@@ -95,7 +95,16 @@ function returnArgumentsArray(numbers) {
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn, ...args) {}
+
+var sum = function() {
+  return [].reduce.call(arguments, function(result, current) {
+    return result + current;
+  }, this.sum);
+};
+var bindedSum = sum.bind({sum: 0});
+console.log(bindedSum(40, 50,10));
+
+
 
 export {
   returnFirstArgument,
