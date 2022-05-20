@@ -9,9 +9,7 @@
    addListener('click', document.querySelector('a'), () => console.log('...')) // должна добавить указанный обработчик кликов на указанный элемент
  */
 function addListener(eventName, target, fn) {
-  target.addEventListener(eventName, () => {
-    fn();
-  })
+  target.addEventListener(eventName, fn)
 };
 
 /*
@@ -23,10 +21,8 @@ function addListener(eventName, target, fn) {
    removeListener('click', document.querySelector('a'), someHandler) // должна удалить указанный обработчик кликов на указанный элемент
  */
 function removeListener(eventName, target, fn) {
-  target.removeEventListener(eventName, () => {
-    fn();
-  })
-}
+  target.removeEventListener(eventName, fn)
+};
 
 /*
  Задание 3:
@@ -51,7 +47,8 @@ function skipDefault(eventName, target) {
    emulateClick(document.querySelector('a')) // для указанного элемента должно быть симулировано события click
  */
 function emulateClick(target) {
-  target.addEventListener('click', () => {})
+  var click = new Event("click");
+  target.dispatchEvent(click);
 }
 
 /*
@@ -65,7 +62,7 @@ function emulateClick(target) {
  */
 function delegate(target, fn) {
   target.addEventListener('click', (e) => {
-    if (e.target.tagName === 'button') {
+    if (e.target.tagName === 'BUTTON') {
       fn()
     }
   })
@@ -81,9 +78,9 @@ function delegate(target, fn) {
    once(document.querySelector('button'), () => console.log('обработчик выполнился!')) // добавит такой обработчик кликов для указанного элемента, который вызовется только один раз и затем удалится
  */
 function once(target, fn) {
-  target.addEventListener.one('click', () => {
+  target.addEventListener('click', () => {
     fn();
-  })
+  }, { once: true })
 }
 
 export { addListener, removeListener, skipDefault, emulateClick, delegate, once };
